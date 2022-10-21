@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "fastapi-template-project"
+version = "0.1.0"
+description = ""
+authors = ["b-kuch <58431879+b-kuch@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "fastapi_template_project"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = {extras = ["all"], version = "^0.85.1"}
+sqlmodel = "^0.0.8"
+
+[tool.poetry.group.dev.dependencies]
+bandit = "^1.7.4"
+pytest = "^7.1.3"
+flake8 = "^5.0.4"
+black = "^22.10.0"
+isort = "^5.10.1"
+mypy = "^0.982"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

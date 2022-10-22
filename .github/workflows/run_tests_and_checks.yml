@@ -32,6 +32,7 @@ jobs:
     - name: Cache poetry packages
       uses: actions/cache@v3
       with:
+        key: poetry-${{ hashFiles('poetry.lock') }}
         path: ~/.cache/pypoetry
 
     - name: Lint with flake8

@@ -11,6 +11,7 @@ python = "^3.10"
 fastapi = {extras = ["all"], version = "^0.85.1"}
 sqlmodel = "^0.0.8"
 pytest-cov = "^4.0.0"
+httpx = "^0.23.0"
 
 [tool.poetry.group.dev.dependencies]
 bandit = "^1.7.4"

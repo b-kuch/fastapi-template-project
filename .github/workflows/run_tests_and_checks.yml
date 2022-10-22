@@ -32,14 +32,16 @@ jobs:
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
-        poetry run flake8 . --show-source --max-line-length=127 --statistics > flake8-${{ matrix.python-version }}.txt
+        poetry run flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        poetry run flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics > flake8-report-${{ matrix.python-version }}.txt
 
     - name: Check security vulnerabilities with bandit
       run: |
         # run bandit on src
-        poetry run bandit -r src -o bandit_src_report.out
+        poetry run bandit -r src -o bandit-src-report.out
         # run bandit on tests, skip the assertion vulnerability
-        poetry run bandit -r tests --skip B101 -o bandit_tests_report.out
+        poetry run bandit -r tests --skip B101 -o bandit-tests-report.out
       continue-on-error: true
       if: ${{ always() }}
 
@@ -64,21 +66,21 @@ jobs:
     - name: Upload bandit source code check results
       uses: actions/upload-artifact@v3
       with:
-        name: bandit_src_report.out-${{ matrix.python-version }}
-        path: bandit_src_report.out
+        name: bandit-src-report.out-${{ matrix.python-version }}
+        path: bandit-src-report.out
 
     - name: Upload bandit tests check results
       uses: actions/upload-artifact@v3
       with:
-        name: bandit_tests_report-${{ matrix.python-version }}
-        path: bandit_tests_report.out
+        name: bandit-tests-report-${{ matrix.python-version }}
+        path: bandit-tests-report.out
       # Use always() to always run this step to publish test results when there are test failures
       if: ${{ always() }}
 
     - name: Upload flake8 check results
       uses: actions/upload-artifact@v3
       with:
-        name: flake8-${{ matrix.python-version }}.txt
-        path: flake8_report.out
+        name: flake8-report-${{ matrix.python-version }}.txt
+        path: flake-report.out
       # Use always() to always run this step to publish test results when there are test failures
       if: ${{ always() }}

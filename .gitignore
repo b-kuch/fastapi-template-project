@@ -4,3 +4,4 @@ junit
 .coverage
 htmlcov
 coverage.xml
+flake8-report-*.txt

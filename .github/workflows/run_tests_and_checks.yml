@@ -26,14 +26,14 @@ jobs:
         python-version: ${{ matrix.python-version }}
         cache: poetry
 
-    - name: Install dependencies
-      run: poetry install --no-root
-
     - name: Cache poetry packages
       uses: actions/cache@v3
       with:
         key: poetry-${{ hashFiles('poetry.lock') }}
         path: ~/.cache/pypoetry
+        
+    - name: Install dependencies
+      run: poetry install --no-root
 
     - name: Lint with flake8
       run: |

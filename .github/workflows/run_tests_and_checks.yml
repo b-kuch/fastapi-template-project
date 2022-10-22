@@ -32,7 +32,7 @@ jobs:
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
-        poetry run flake8 . --count --show-source --max-line-length=127 --statistics --output-file=flake8-${{ matrix.python-version }}.txt
+        poetry run flake8 . --show-source --max-line-length=127 --statistics --output-file=flake8-${{ matrix.python-version }}.txt
 
     - name: Check security vulnerabilities with bandit
       run: |
